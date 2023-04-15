@@ -16,22 +16,22 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  * The result should be 9
  */
-function getMatrixElementsSum (matrix) {
-  let sumMinArr = 0
-for(let i = 0; i < matrix.length; i++){
-  for(let j = 0; i < i.length; j++){
-if(j === j && matrix[j] !== 0){
-  sumMinArr += matrix[j]
+function getMatrixElementsSum(matrix) {
+  let total = 0;
+  let prevZeroCols = [];
+
+  matrix.forEach(row => {
+    row.forEach((val, col) => {
+      if (val === 0) {
+        prevZeroCols.push(col);
+      } else if (!prevZeroCols.includes(col)) {
+        total += val;
+      }
+    });
+  });
+
+  return total;
 }
-}
-}
-console.log(sumMinArr)
-}
-getMatrixElementsSum([
-  [1, 2, 3, 4],
-  [0, 5, 0, 0],
-  [2, 0, 3, 3],
-])
 module.exports = {
   getMatrixElementsSum
 };
